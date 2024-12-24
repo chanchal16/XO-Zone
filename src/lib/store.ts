@@ -1,8 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
+import  singleModeReducer  from "./features/single-player/singlePlayerSlice";
 
 export const makeStore = () => {
   return configureStore({
-    reducer: {},
+    reducer: {
+      singleMode: singleModeReducer
+    },
   });
 };
 
