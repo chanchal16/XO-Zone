@@ -1,37 +1,33 @@
+import { makeMove } from "@/lib/features/single-player/singlePlayerSlice";
+import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 import React from "react";
 
-const Board = ({ board, playerSymbol, aiSymbol, setBoard, winner }: any) => {
+const Board = () => {
+  const singlePlayerState = useAppSelector((state) => state.singleMode);
+  const {playerSymbol,aiSymbol,board,winner} = singlePlayerState
+  const dispatch = useAppDispatch();
+
   const makeAiMove = () => {
-    setBoard((prevBoard) => {
-      const availableMoves: [number, number][] = [];
+    const availableMoves: [number, number][] = [];
       // Find all empty cells
-      prevBoard.forEach((row, rowIndex) => {
+      board.forEach((row, rowIndex) => {
         row.forEach((cell, colIndex) => {
           if (cell === "") {
             availableMoves.push([rowIndex, colIndex]);
           }
         });
       });
-
+      
       if (availableMoves.length > 0) {
         const [moveRow, moveCol] =
           availableMoves[Math.floor(Math.random() * availableMoves.length)];
-        const newBoard = prevBoard.map((row) => [...row]); // Deep copy of the board
-        newBoard[moveRow][moveCol] = aiSymbol;
-        return newBoard;
+        dispatch(makeMove({row:moveRow,col:moveCol,symbol:aiSymbol}))
       }
-      // If no moves are available, return the current board
-      return prevBoard;
-    });
   };
 
   const handleMove = (row: number, col: number) => {
     if (board[row][col] === "" && playerSymbol && !winner) {
-      setBoard((prevBoard) => {
-        const newBoard = prevBoard.map((row) => [...row]); // Deep copy of the board
-        newBoard[row][col] = playerSymbol;
-        return newBoard;
-      });
+      dispatch(makeMove({row,col,symbol:playerSymbol}))
       setTimeout(makeAiMove, 500); // Add delay for better UX
     }
   };

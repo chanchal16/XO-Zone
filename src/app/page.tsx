@@ -1,55 +1,49 @@
 "use client";
-import Board from "@/components/Board";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { selectSymbol } from "@/lib/features/single-player/singlePlayerSlice";
+import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 
 export default function Home() {
-  const [playerSymbol, setPlayerSymbol] = useState<string>("");
-  const [aiSymbol, setAiSymbol] = useState<string>("");
-  const [board, setBoard] = useState([
-    ["", "", ""],
-    ["", "", ""],
-    ["", "", ""],
-  ]);
-  const [score, setScore] = useState({ player: 0, ai: 0 });
-  const [winner, setWinner] = useState(null);
+  const singlePlayerState = useAppSelector((state) => state.singleMode);
+  const { playerSymbol, aiSymbol } = singlePlayerState;
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
-  const selectSymbol = (symbol: string) => {
-    setPlayerSymbol(symbol);
-    setAiSymbol(symbol === "X" ? "O" : "X");
-  };
   return (
-    <div className="flex flex-col items-center justify-items-center min-h-screen p-8 pb-20 gap-4 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="flex flex-col items-center justify-items-center min-h-screen p-8 pb-20 gap-8 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <h1 className="text-2xl">Choose your symbol</h1>
       <div className="flex gap-4">
         <Button
           variant={"default"}
           className="bg-purple-500 hover:bg-purple-700"
-          onClick={() => selectSymbol("X")}
+          onClick={() => dispatch(selectSymbol("X"))}
         >
           Choose X
         </Button>
         <Button
           variant={"default"}
           className="bg-yellow-500 hover:bg-yellow-700"
-          onClick={() => selectSymbol("O")}
+          onClick={() => dispatch(selectSymbol("O"))}
         >
           Choose O
         </Button>
       </div>
       {playerSymbol && (
-        <div className="text-lg mb-4">
-          You are: {playerSymbol} | AI is: {aiSymbol}
+        <div>
+          <div className="text-lg mb-4">
+            You are: {playerSymbol} | AI is: {aiSymbol}
+          </div>
+
+          <Button
+            variant={"secondary"}
+            className="bg-green-500 hover:bg-green-600"
+            onClick={() => router.push("/game")}
+          >
+            Start Game
+          </Button>
         </div>
       )}
-      <div className="grid grid-cols-3 gap-2 w-60">
-        <Board
-          board={board}
-          winner={winner}
-          playerSymbol={playerSymbol}
-          aiSymbol={aiSymbol}
-          setBoard={setBoard}
-        />
-      </div>
     </div>
   );
 }
