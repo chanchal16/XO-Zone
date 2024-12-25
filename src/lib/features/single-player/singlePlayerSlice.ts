@@ -1,14 +1,16 @@
+import { checkDraw, checkWin } from "@/helpers/check-win";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface SingleMode {
   board: string[][];
-  playerSymbol: string | null;
+  playerSymbol: string;
   aiSymbol: string;
   winner: string | null;
   score: {
     player: number;
     AI: number;
   };
+  isDraw: boolean;
 }
 
 const initialState: SingleMode = {
@@ -17,13 +19,14 @@ const initialState: SingleMode = {
     ["", "", ""],
     ["", "", ""],
   ],
-  playerSymbol: null,
+  playerSymbol: "",
   aiSymbol: "",
   score: {
     player: 0,
     AI: 0,
   },
   winner: null,
+  isDraw: false,
 };
 
 const singleModeSlice = createSlice({
@@ -41,10 +44,27 @@ const singleModeSlice = createSlice({
       const { row, col, symbol } = action.payload;
       if (state.board[row][col] === "" && !state.winner) {
         state.board[row][col] = symbol;
+        // Check for a winner
+        const winner = checkWin(state.board);
+        if (winner) {
+          state.winner = winner;
+          if (winner === state.playerSymbol) {
+            state.score.player += 1;
+          } else {
+            state.score.AI += 1;
+          }
+        } else if (checkDraw(state.board)) {
+          state.isDraw = true;
+        }
       }
+    },
+    resetGame: (state) => {
+      state.board = initialState.board;
+      state.winner = null;
+      state.isDraw = false;
     },
   },
 });
 
-export const { selectSymbol, makeMove } = singleModeSlice.actions;
+export const { selectSymbol, makeMove, resetGame } = singleModeSlice.actions;
 export default singleModeSlice.reducer;
