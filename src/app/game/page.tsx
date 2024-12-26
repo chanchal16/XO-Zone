@@ -1,7 +1,10 @@
 "use client";
 import Board from "@/components/Board";
 import { Button } from "@/components/ui/button";
-import { resetGame } from "@/lib/features/single-player/singlePlayerSlice";
+import {
+  resetGame,
+  restartGame,
+} from "@/lib/features/single-player/singlePlayerSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -38,9 +41,18 @@ const SinglePlayerGame = () => {
       )}
       {isDraw && <div className="text-center mt-4">It's a Draw!</div>}
 
-      <Button variant={"destructive"} onClick={handleQuit}>
-        Quit
-      </Button>
+      <div className="flex gap-6">
+        <Button
+          variant={"outline"}
+          className="border-2 text-green-500 font-semibold border-green-500 hover:text-green-700"
+          onClick={() => dispatch(restartGame())}
+        >
+          Restart
+        </Button>
+        <Button variant={"destructive"} onClick={handleQuit}>
+          Quit
+        </Button>
+      </div>
     </div>
   );
 };

@@ -58,13 +58,16 @@ const singleModeSlice = createSlice({
         }
       }
     },
-    resetGame: (state) => {
+    restartGame:(state)=>{
       state.board = initialState.board;
-      state.winner = null;
-      state.isDraw = false;
+      state.winner = initialState.winner;
+      state.isDraw = initialState.isDraw
+    },
+    resetGame: (state) => {
+      Object.assign(state, initialState);
     },
   },
 });
 
-export const { selectSymbol, makeMove, resetGame } = singleModeSlice.actions;
+export const { selectSymbol, makeMove, resetGame, restartGame } = singleModeSlice.actions;
 export default singleModeSlice.reducer;
