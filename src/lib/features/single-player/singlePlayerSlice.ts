@@ -1,19 +1,8 @@
 import { checkDraw, checkWin } from "@/helpers/check-win";
+import { DIFFICULTY, SinglePlayerMode } from "@/types/type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export interface SingleMode {
-  board: string[][];
-  playerSymbol: string;
-  aiSymbol: string;
-  winner: string | null;
-  score: {
-    player: number;
-    AI: number;
-  };
-  isDraw: boolean;
-}
-
-const initialState: SingleMode = {
+const initialState: SinglePlayerMode = {
   board: [
     ["", "", ""],
     ["", "", ""],
@@ -27,6 +16,7 @@ const initialState: SingleMode = {
   },
   winner: null,
   isDraw: false,
+  difficulty: DIFFICULTY.EASY,
 };
 
 const singleModeSlice = createSlice({
@@ -36,6 +26,9 @@ const singleModeSlice = createSlice({
     selectSymbol: (state, action: PayloadAction<string>) => {
       state.playerSymbol = action.payload;
       state.aiSymbol = action.payload === "X" ? "O" : "X";
+    },
+    selectDifficulty: (state, action: PayloadAction<DIFFICULTY>) => {
+      state.difficulty = action.payload;
     },
     makeMove: (
       state,
@@ -69,6 +62,11 @@ const singleModeSlice = createSlice({
   },
 });
 
-export const { selectSymbol, makeMove, resetGame, restartGame } =
-  singleModeSlice.actions;
+export const {
+  selectSymbol,
+  makeMove,
+  resetGame,
+  restartGame,
+  selectDifficulty,
+} = singleModeSlice.actions;
 export default singleModeSlice.reducer;
