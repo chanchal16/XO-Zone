@@ -1,31 +1,14 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import {
-  selectSymbol,
-  setInitialScores,
-} from "@/lib/features/single-player/singlePlayerSlice";
+import { selectSymbol } from "@/lib/features/single-player/singlePlayerSlice";
 import { useAppSelector, useAppDispatch } from "@/lib/hooks";
-import { fetchScores } from "@/lib/api";
-import { useEffect } from "react";
-import { initializeSession } from "@/helpers/store-session";
 
 export default function Home() {
   const singlePlayerState = useAppSelector((state) => state.singleMode);
   const { playerSymbol, aiSymbol } = singlePlayerState;
   const dispatch = useAppDispatch();
   const router = useRouter();
-
-  useEffect(() => {
-    const sessionId = initializeSession();
-    const loadScores = async () => {
-      const scores = await fetchScores(sessionId);
-      if (scores) {
-        dispatch(setInitialScores(scores));
-      }
-    };
-    loadScores();
-  }, [dispatch]);
 
   return (
     <div className="flex flex-col items-center justify-items-center min-h-screen p-8 pb-20 gap-8 sm:p-20 font-[family-name:var(--font-geist-sans)]">

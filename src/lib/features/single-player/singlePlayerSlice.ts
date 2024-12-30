@@ -1,5 +1,4 @@
 import { checkDraw, checkWin } from "@/helpers/check-win";
-import { updateScores } from "@/lib/api";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface SingleMode {
@@ -38,13 +37,6 @@ const singleModeSlice = createSlice({
       state.playerSymbol = action.payload;
       state.aiSymbol = action.payload === "X" ? "O" : "X";
     },
-    setInitialScores: (state, action: PayloadAction<any>) => {
-      const { player_symbol, player_score, ai_score } = action.payload;
-      state.playerSymbol = player_symbol;
-      state.score.player = player_score;
-      state.score.AI = ai_score;
-    },
-
     makeMove: (
       state,
       action: PayloadAction<{ row: number; col: number; symbol: string }>
@@ -72,20 +64,11 @@ const singleModeSlice = createSlice({
       state.isDraw = initialState.isDraw;
     },
     resetGame: (state) => {
-      const sessionId = localStorage.getItem("session_id") ?? "";
-      if (state.winner && sessionId) {
-        updateScores(sessionId, state.playerSymbol, state.winner);
-      }
       Object.assign(state, initialState);
     },
   },
 });
 
-export const {
-  selectSymbol,
-  makeMove,
-  resetGame,
-  restartGame,
-  setInitialScores,
-} = singleModeSlice.actions;
+export const { selectSymbol, makeMove, resetGame, restartGame } =
+  singleModeSlice.actions;
 export default singleModeSlice.reducer;
