@@ -1,36 +1,20 @@
+import { handleAIMove } from "@/lib/features/single-player/aiMiddleware";
 import { makeMove } from "@/lib/features/single-player/singlePlayerSlice";
 import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 import React from "react";
 
 const Board = () => {
   const singlePlayerState = useAppSelector((state) => state.singleMode);
-  const {playerSymbol,aiSymbol,board,winner} = singlePlayerState
+  const { playerSymbol, board, winner } = singlePlayerState;
   const dispatch = useAppDispatch();
-
-  const makeAiMove = () => {
-    const availableMoves: [number, number][] = [];
-      // Find all empty cells
-      board.forEach((row, rowIndex) => {
-        row.forEach((cell, colIndex) => {
-          if (cell === "") {
-            availableMoves.push([rowIndex, colIndex]);
-          }
-        });
-      });
-      
-      if (availableMoves.length > 0) {
-        const [moveRow, moveCol] =
-          availableMoves[Math.floor(Math.random() * availableMoves.length)];
-        dispatch(makeMove({row:moveRow,col:moveCol,symbol:aiSymbol}))
-      }
-  };
 
   const handleMove = (row: number, col: number) => {
     if (board[row][col] === "" && playerSymbol && !winner) {
-      dispatch(makeMove({row,col,symbol:playerSymbol}))
-      setTimeout(makeAiMove, 500); // Add delay for better UX
+      dispatch(makeMove({ row, col, symbol: playerSymbol }));
+      dispatch(handleAIMove());
     }
   };
+
   return (
     <>
       {board.map((row, rowIndex) =>
