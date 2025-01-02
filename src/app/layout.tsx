@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Roboto_Serif, Poppins, Chewy } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "./StoreProvider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const chewy = Chewy({
+  weight: "400",
+  variable: "--font-chewy",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const poppins = Poppins({
+  weight: "500",
+  variable: "--font-poppins",
   subsets: ["latin"],
 });
 
@@ -26,10 +28,12 @@ export default function RootLayout({
   return (
     <StoreProvider>
       <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          {children}
+        <body className={`${chewy.variable} ${poppins.variable} antialiased`}>
+          <header className="header">Header</header>
+          <aside className="sidebar-left">Left Sidebar</aside>
+          <main className="main">{children}</main>
+          <aside className="sidebar-right">Right Sidebar</aside>
+          <footer className="footer">Footer</footer>
         </body>
       </html>
     </StoreProvider>
