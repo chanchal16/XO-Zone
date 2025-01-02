@@ -17,6 +17,7 @@ const initialState: SinglePlayerMode = {
   winner: null,
   isDraw: false,
   difficulty: DIFFICULTY.EASY,
+  winningCells: null,
 };
 
 const singleModeSlice = createSlice({
@@ -38,9 +39,11 @@ const singleModeSlice = createSlice({
       if (state.board[row][col] === "" && !state.winner) {
         state.board[row][col] = symbol;
         // Check for a winner
-        const winner = checkWin(state.board);
-        if (winner) {
+        const result = checkWin(state.board);
+        if (result) {
+          const { winner, winningCells } = result;
           state.winner = winner;
+          state.winningCells = winningCells;
           if (winner === state.playerSymbol) {
             state.score.player += 1;
           } else {
@@ -55,6 +58,7 @@ const singleModeSlice = createSlice({
       state.board = initialState.board;
       state.winner = initialState.winner;
       state.isDraw = initialState.isDraw;
+      state.winningCells = initialState.winningCells;
     },
     resetGame: (state) => {
       Object.assign(state, initialState);
