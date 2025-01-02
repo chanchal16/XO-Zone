@@ -1,4 +1,8 @@
-export const checkWin = (board: string[][]): string | null => {
+export interface WinResult {
+  winner: string;
+  winningCells: [number, number][];
+}
+export const checkWin = (board: string[][]): WinResult | null => {
   const winPatterns = [
     [
       [0, 0],
@@ -50,7 +54,10 @@ export const checkWin = (board: string[][]): string | null => {
       symbol === board[b[0]][b[1]] &&
       symbol === board[c[0]][c[1]]
     ) {
-      return symbol;
+      return {
+        winner: symbol,
+        winningCells: [a, b, c] as [number, number][], // These are already in [row, col] format
+      };
     }
   }
 

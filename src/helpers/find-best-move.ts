@@ -8,9 +8,9 @@ const minimax = ({
   playerSymbol,
   depth,
 }: MinMax): number => {
-  const winner = checkWin(board);
-  if (winner === aiSymbol) return 10;
-  if (winner === playerSymbol) return -10;
+  const result = checkWin(board);
+  if (result?.winner === aiSymbol) return 10;
+  if (result?.winner === playerSymbol) return -10;
   if (checkDraw(board)) return 0;
   if (depth === 0) return 0; // Stop recursion at depth limit
 
