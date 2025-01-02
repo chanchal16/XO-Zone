@@ -15,7 +15,14 @@ export interface SinglePlayerMode {
   };
   isDraw: boolean;
   difficulty: DIFFICULTY;
+  winningCells: [number, number][] | null;
 }
+
+export type IPlayer = {
+  player: SinglePlayerMode["playerSymbol"];
+  bot: SinglePlayerMode["aiSymbol"];
+  avatar?: string;
+};
 
 export type MinMax = {
   board: string[][];
