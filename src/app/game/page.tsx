@@ -26,10 +26,9 @@ const SinglePlayerGame = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-items-center min-h-screen p-8 pb-20 gap-4 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="flex flex-col items-center bg-minimal-bg text-minimal-textClr min-h-screen p-8 pb-20 gap-4 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <div>
         <label htmlFor="difficulty">Choose a difficulty:</label>
-
         <select
           name="difficulty"
           id="difficulty"
@@ -41,7 +40,7 @@ const SinglePlayerGame = () => {
           <option value="hard">Hard</option>
         </select>
       </div>
-      <div className="grid grid-cols-3 gap-2 w-60">
+      <div className="grid grid-cols-3 w-60 bg-minimal-board">
         <Board />
       </div>
 
@@ -62,13 +61,13 @@ const SinglePlayerGame = () => {
 
       <div className="flex gap-6">
         <Button
-          variant={"outline"}
-          className="border-2 text-green-500 font-semibold border-green-500 hover:text-green-700"
+          variant={"default"}
+          className=" text-white font-semibold bg-minimal-accentC"
           onClick={() => dispatch(restartGame())}
         >
           Restart
         </Button>
-        <Button variant={"destructive"} onClick={handleQuit}>
+        <Button variant={"destructive"} className="bg-minimal-playerO-200 text-black" onClick={handleQuit}>
           Quit
         </Button>
       </div>
