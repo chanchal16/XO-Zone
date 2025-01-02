@@ -12,6 +12,27 @@ export default {
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
+			  minimal: {      
+				bg: "#f7f7f7 ", 		
+				board: "#ffffff",
+				playerX: {
+					200:"#112a46",
+					100:"#acc8e5"
+				},		
+				playerO: {
+					200: "#d7ffab",
+					100: "#e6ffcb"
+				},		
+				textClr: "#1e1e1e",
+				accentC: "#6d454c",
+				gridLines: "#aaa28c",
+
+				highlightWin: "#FFD700",
+				highlightLoss: "#FF4500",
+			  },
+			  boxShadow: {
+				neon: "0 0 10px #00FFAB, 0 0 20px #00FFAB, 0 0 30px #00FFAB",
+			  },
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
