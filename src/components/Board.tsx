@@ -25,17 +25,21 @@ const Board = () => {
       {board.map((row, rowIndex) =>
         row.map((cell, colIndex) => {
           const isWinner = isWinningCell(rowIndex, colIndex);
+          const isLastRow = rowIndex === board.length - 1; // Check if it's the last row
+          const isLastCol = colIndex === row.length - 1;
           return (
             <button
               key={`${rowIndex}-${colIndex}`}
               onClick={() => handleMove(rowIndex, colIndex)}
-              className={`w-20 h-20 text-2xl font-extrabold border-x p-2 border-y border-minimal-gridLines flex items-center justify-center
+              className={`h-20 text-2xl font-extrabold  flex items-center justify-center
               ${
                 cell === "X"
                   ? "text-minimal-playerX-200"
                   : "text-minimal-playerO-200"
               }
               ${isWinner ? "bg-[#d6d0bf]/65 animate-pulse" : ""}
+               ${!isLastRow ? "border-b-2 border-minimal-gridLines" : ""}
+          ${!isLastCol ? "border-r-2 border-minimal-gridLines" : ""}
               `}
             >
               {cell === "X" && (

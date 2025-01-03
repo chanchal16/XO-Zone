@@ -40,7 +40,7 @@ const SinglePlayerGame = () => {
           <option value="hard">Hard</option>
         </select>
       </div>
-      <div className="grid grid-cols-3 w-60 bg-minimal-board rounded-md">
+      <div className="grid grid-cols-3 p-6 w-72 bg-minimal-board rounded-lg">
         <Board />
       </div>
 
