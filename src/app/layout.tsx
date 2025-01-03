@@ -31,7 +31,7 @@ export default function RootLayout({
         <body className={`${chewy.variable} ${poppins.variable} antialiased`}>
           <header className="header">Header</header>
           <aside className="sidebar-left">Left Sidebar</aside>
-          <main className="main">{children}</main>
+          <main className="main bg-minimal-gridLines">{children}</main>
           <aside className="sidebar-right">Right Sidebar</aside>
           <footer className="footer">Footer</footer>
         </body>
