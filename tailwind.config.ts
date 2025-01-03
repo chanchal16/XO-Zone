@@ -16,16 +16,16 @@ export default {
 				bg: "#f7f7f7 ", 		
 				board: "#ffffff",
 				playerX: {
-					200:"#112a46",
-					100:"#acc8e5"
+					200:"#f24c00",
+					100:"#fc7a1e"
 				},		
 				playerO: {
-					200: "#d7ffab",
-					100: "#e6ffcb"
+					200: "#485696",
+					// 100: "#e6ffcb"
 				},		
 				textClr: "#1e1e1e",
-				accentC: "#6d454c",
-				gridLines: "#aaa28c",
+				accentC: "#0f0a0a", 
+				gridLines: "#f9c784",
 
 				highlightWin: "#FFD700",
 				highlightLoss: "#FF4500",
