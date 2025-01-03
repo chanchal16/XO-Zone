@@ -29,7 +29,7 @@ const Board = () => {
             <button
               key={`${rowIndex}-${colIndex}`}
               onClick={() => handleMove(rowIndex, colIndex)}
-              className={`w-20 h-20 text-2xl font-extrabold border border-minimal-gridLines flex items-center justify-center
+              className={`w-20 h-20 text-2xl font-extrabold border-x p-2 border-y border-minimal-gridLines flex items-center justify-center
               ${
                 cell === "X"
                   ? "text-minimal-playerX-200"
@@ -39,10 +39,10 @@ const Board = () => {
               `}
             >
               {cell === "X" && (
-                <Image src="/close.png" alt="X" width={28} height={28} />
+                <Image src="/x-mark.png" alt="X" width={28} height={28} />
               )}
               {cell === "O" && (
-                <Image src="/O-letter.png" alt="O" width={28} height={28} />
+                <Image src="/blue-o.png" alt="O" width={28} height={28} />
               )}
             </button>
           );

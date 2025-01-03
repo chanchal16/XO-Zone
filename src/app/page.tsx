@@ -13,22 +13,22 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center  bg-minimal-playerX-100 text-minimal-textClr min-h-screen p-8 pb-20 gap-8 sm:p-20 font-[family-name:var(--font-poppins)]">
+    <div className="flex flex-col items-center  bg-minimal-gridLines text-minimal-textClr min-h-screen p-8 pb-20 gap-8 sm:p-20 font-[family-name:var(--font-poppins)]">
       <h1 className="text-3xl font-semibold font-[family-name:var(--font-chewy)]">
         Pick your side
       </h1>
       <div className="flex flex-col gap-8 ">
         <button
-          className="bg-transparent border-none"
+          className="bg-white rounded-full p-4"
           onClick={() => dispatch(selectSymbol("X"))}
         >
-          <Image src={"/close.png"} alt="X-icon" width={54} height={54} />
+          <Image src={"/x-mark.png"} alt="X-icon" width={44} height={44} />
         </button>
         <button
-          className="bg-transparent border-none"
+          className="bg-white rounded-full p-4"
           onClick={() => dispatch(selectSymbol("O"))}
         >
-          <Image src={"/O-letter.png"} alt="O-icon" width={58} height={58} />
+          <Image src={"/blue-o.png"} alt="O-icon" width={48} height={48} />
         </button>
       </div>
       {playerSymbol && (
@@ -36,7 +36,7 @@ export default function Home() {
           <PlayerInfo player={playerSymbol} bot={aiSymbol} />
           <Button
             variant={"default"}
-            className="bg-minimal-accentC text-white hover:bg-minimal-gridLines"
+            className="bg-minimal-accentC rounded-md text-minimal-playerX-100 hover:bg-minimal-playerX-100 hover:text-minimal-accentC"
             onClick={() => router.push("/game")}
           >
             Start Game
