@@ -22,7 +22,8 @@ const PlayerInfo = ({
           height={avatarHeight ?? 100}
         />
         <span
-          className={`${labelClassName} py-1.5 px-4 inline-flex items-center gap-2 absolute -bottom-3.5 bg-white text-minimal-accentC rounded-md text-sm`}
+          className={`${labelClassName} py-1.5 px-4 inline-flex items-center gap-2 absolute -bottom-3.5 bg-white
+          text-minimal-accentC rounded-md text-xs md:text-sm`}
         >
           You {<SymbolIcon symbol={player} width={14} height={14} />}
         </span>
@@ -35,7 +36,8 @@ const PlayerInfo = ({
           height={avatarHeight ?? 100}
         />
         <span
-          className={`${labelClassName} py-1.5 px-4 inline-flex items-center gap-2 absolute -bottom-3.5 bg-white text-minimal-accentC rounded-md text-sm`}
+          className={`${labelClassName} py-1.5 px-4 inline-flex items-center gap-2 absolute -bottom-3.5 bg-white 
+          text-minimal-accentC rounded-md text-xs md:text-sm`}
         >
           Bot {<SymbolIcon symbol={bot} width={14} height={14} />}
         </span>
