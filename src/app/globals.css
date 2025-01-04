@@ -80,30 +80,24 @@ body {
 
 .header {
   grid-area: header;
-  background-color: #4caf50;
+  border-bottom: 2px solid #e7e7e7;
   padding: 10px;
   text-align: center;
-  color: white;
   font-size: 1.5rem;
 }
 
 .sidebar-left {
   grid-area: left;
-  /* background-color: #2196f3; */
   padding: 10px;
-  color: white;
 }
 
 .main {
   grid-area: main;
-  /* padding: 10px; */
 }
 
 .sidebar-right {
   grid-area: right;
-  /* background-color: #ff9800; */
   padding: 10px;
-  color: white;
 }
 
 .footer {
@@ -112,14 +106,6 @@ body {
   padding: 10px;
   text-align: center;
   color: white;
-}
-
-.divide-x-2 {
-  border-right: 2px solid #ccc; /* Only right border for vertical divisions */
-}
-
-.divide-y-2 {
-  border-bottom: 2px solid #ccc; /* Only bottom border for horizontal divisions */
 }
 
 @media (max-width: 768px) {
