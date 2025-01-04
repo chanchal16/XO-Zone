@@ -19,7 +19,7 @@ export default function ClientLayout({
         {pathname === "/game" && (
           <div className="my-20">
             <PlayerInfo
-              className="!mb-0"
+              className="!mb-0 justify-center"
               player={playerSymbol}
               bot={aiSymbol}
               avatarWidth={80}
