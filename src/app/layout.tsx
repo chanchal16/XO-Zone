@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Roboto_Serif, Poppins, Chewy } from "next/font/google";
 import "./globals.css";
+import ClientLayout from "./ClientLayout";
 import StoreProvider from "./StoreProvider";
+import { Poppins, Chewy } from "next/font/google";
 
 const chewy = Chewy({
   weight: "400",
@@ -26,16 +27,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <StoreProvider>
-      <html lang="en">
-        <body className={`${chewy.variable} ${poppins.variable} antialiased`}>
-          <header className="header">Header</header>
-          <aside className="sidebar-left">Left Sidebar</aside>
-          <main className="main bg-minimal-gridLines">{children}</main>
-          <aside className="sidebar-right">Right Sidebar</aside>
-          <footer className="footer">Footer</footer>
-        </body>
-      </html>
-    </StoreProvider>
+    <html lang="en">
+      <body className={`${chewy.variable} ${poppins.variable} antialiased`}>
+        <StoreProvider>
+          <ClientLayout>{children}</ClientLayout>
+        </StoreProvider>
+      </body>
+    </html>
   );
 }
