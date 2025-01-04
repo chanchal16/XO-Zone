@@ -9,10 +9,17 @@ import {
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useRouter } from "next/navigation";
 import React from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const SinglePlayerGame = () => {
   const singlePlayerState = useAppSelector((state) => state.singleMode);
-  const { winner, isDraw, difficulty } = singlePlayerState;
+  const { winner, isDraw } = singlePlayerState;
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -21,24 +28,23 @@ const SinglePlayerGame = () => {
     router.push("/");
   };
 
-  const handleChange = (e: any) => {
-    dispatch(selectDifficulty(e.target.value));
+  const handleChange = (value: any) => {
+    dispatch(selectDifficulty(value));
   };
 
   return (
     <div className="flex flex-col items-center bg-minimal-playerO-100 text-minimal-textClr min-h-screen p-8 pb-20 gap-4 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <div>
-        <label htmlFor="difficulty">Choose a difficulty:</label>
-        <select
-          name="difficulty"
-          id="difficulty"
-          value={difficulty}
-          onChange={handleChange}
-        >
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
+      <div className="self-start">
+        <Select defaultValue="easy" onValueChange={handleChange}>
+          <SelectTrigger className="w-[120px]">
+            <SelectValue placeholder="Difficulty" />
+          </SelectTrigger>
+          <SelectContent className="">
+            <SelectItem value="easy">Easy</SelectItem>
+            <SelectItem value="medium">Medium</SelectItem>
+            <SelectItem value="hard">Hard</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
       <div className="grid grid-cols-3 p-6 w-72 bg-minimal-board rounded-lg">
         <Board />
