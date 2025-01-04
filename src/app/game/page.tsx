@@ -12,7 +12,7 @@ import React from "react";
 
 const SinglePlayerGame = () => {
   const singlePlayerState = useAppSelector((state) => state.singleMode);
-  const { winner, score, isDraw, difficulty } = singlePlayerState;
+  const { winner, isDraw, difficulty } = singlePlayerState;
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -42,14 +42,6 @@ const SinglePlayerGame = () => {
       </div>
       <div className="grid grid-cols-3 p-6 w-72 bg-minimal-board rounded-lg">
         <Board />
-      </div>
-
-      <div className="flex flex-col w-60">
-        <h3 className="text-xl">Score</h3>
-        <div className="flex w-40 justify-between text-gray-500 text-lg">
-          <p>player: {score.player}</p>
-          <p>AI: {score.AI}</p>
-        </div>
       </div>
 
       {winner && (
