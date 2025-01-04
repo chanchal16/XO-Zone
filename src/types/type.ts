@@ -22,6 +22,16 @@ export type IPlayer = {
   player: SinglePlayerMode["playerSymbol"];
   bot: SinglePlayerMode["aiSymbol"];
   avatar?: string;
+  className?: string;
+  avatarWidth?: number;
+  avatarHeight?: number;
+  labelClassName?: string;
+};
+
+export type ISymbol = {
+  symbol: string;
+  width: number;
+  height: number;
 };
 
 export type MinMax = {
