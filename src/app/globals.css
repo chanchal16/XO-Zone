@@ -88,7 +88,6 @@ body {
 
 .sidebar-left {
   grid-area: left;
-  padding: 10px;
 }
 
 .main {
@@ -97,7 +96,6 @@ body {
 
 .sidebar-right {
   grid-area: right;
-  padding: 10px;
 }
 
 .footer {
