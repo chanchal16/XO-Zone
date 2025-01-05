@@ -1,7 +1,15 @@
 "use client";
 import PlayerInfo from "@/components/PlayerInfo";
-import { useAppSelector } from "@/lib/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { usePathname } from "next/navigation";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { selectDifficulty } from "@/lib/features/single-player/singlePlayerSlice";
 
 export default function ClientLayout({
   children,
@@ -10,12 +18,37 @@ export default function ClientLayout({
 }) {
   const singlePlayerState = useAppSelector((state) => state.singleMode);
   const { score, playerSymbol, aiSymbol } = singlePlayerState;
+  const dispatch = useAppDispatch();
   const pathname = usePathname();
+
+  const handleChange = (value: any) => {
+    dispatch(selectDifficulty(value));
+  };
 
   return (
     <>
       <header className="header">Header</header>
-      <aside className="sidebar-left">
+      <aside className="sidebar-left px-4">
+        {pathname === "/game" && (
+          <div className="mt-8">
+            <label className="block text-base font-medium leading-6 text-gray-900">
+              Choose a Difficulty
+            </label>
+            <Select defaultValue="easy" onValueChange={handleChange}>
+              <SelectTrigger className="w-[120px]">
+                <SelectValue placeholder="Difficulty" />
+              </SelectTrigger>
+              <SelectContent className="">
+                <SelectItem value="easy">Easy</SelectItem>
+                <SelectItem value="medium">Medium</SelectItem>
+                <SelectItem value="hard">Hard</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        )}
+      </aside>
+      <main className="main bg-minimal-gridLines">{children}</main>
+      <aside className="sidebar-right px-3">
         {pathname === "/game" && (
           <div className="my-20">
             <PlayerInfo
@@ -32,8 +65,6 @@ export default function ClientLayout({
           </div>
         )}
       </aside>
-      <main className="main bg-minimal-gridLines">{children}</main>
-      <aside className="sidebar-right">Right Sidebar</aside>
       <footer className="footer">Footer</footer>
     </>
   );
