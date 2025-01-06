@@ -13,7 +13,7 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center  bg-minimal-gridLines text-minimal-textClr min-h-screen p-8 pb-20 gap-8 sm:p-20 font-[family-name:var(--font-poppins)]">
+    <div className="flex flex-col items-center  bg-minimal-gridLines text-minimal-textClr min-h-screen sm:min-h-max p-8 pb-20 gap-8 sm:p-20 font-[family-name:var(--font-poppins)]">
       <h1 className="text-3xl font-semibold font-[family-name:var(--font-chewy)]">
         Pick your side
       </h1>
