@@ -16,7 +16,7 @@ const PlayerInfo = ({
     <div className={`flex gap-16 text-lg mb-8 ${className}`}>
       <div className="flex flex-col items-center px-2 relative">
         <Image
-          src={"https://api.multiavatar.com/Broomhilda.svg"}
+          src={avatar ?? "https://api.multiavatar.com/Broomhilda.svg"}
           alt="avatar"
           width={avatarWidth ?? 100}
           height={avatarHeight ?? 100}
@@ -30,7 +30,7 @@ const PlayerInfo = ({
       </div>
       <div className="flex flex-col items-center relative">
         <Image
-          src={"https://api.multiavatar.com/Skeleto.svg"}
+          src={avatar ?? "https://api.multiavatar.com/Skeleto.svg"}
           alt="bot"
           width={avatarWidth ?? 100}
           height={avatarHeight ?? 100}
