@@ -6,11 +6,12 @@ import React from "react";
 
 const Board = () => {
   const singlePlayerState = useAppSelector((state) => state.singleMode);
-  const { playerSymbol, board, winner, winningCells } = singlePlayerState;
+  const { playerSymbol, board, winner, winningCells, isPlayerTurn } =
+    singlePlayerState;
   const dispatch = useAppDispatch();
 
   const handleMove = (row: number, col: number) => {
-    if (board[row][col] === "" && playerSymbol && !winner) {
+    if (board[row][col] === "" && playerSymbol && !winner && isPlayerTurn) {
       dispatch(makeMove({ row, col, symbol: playerSymbol }));
       dispatch(handleAIMove());
     }

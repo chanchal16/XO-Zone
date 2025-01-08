@@ -18,6 +18,7 @@ const initialState: SinglePlayerMode = {
   isDraw: false,
   difficulty: DIFFICULTY.EASY,
   winningCells: null,
+  isPlayerTurn: true,
 };
 
 const singleModeSlice = createSlice({
@@ -36,7 +37,12 @@ const singleModeSlice = createSlice({
       action: PayloadAction<{ row: number; col: number; symbol: string }>
     ) => {
       const { row, col, symbol } = action.payload;
-      if (state.board[row][col] === "" && !state.winner) {
+      if (
+        state.board[row][col] === "" &&
+        !state.winner &&
+        ((symbol === state.playerSymbol && state.isPlayerTurn) ||
+          (symbol === state.aiSymbol && !state.isPlayerTurn))
+      ) {
         state.board[row][col] = symbol;
         // Check for a winner
         const result = checkWin(state.board);
@@ -52,6 +58,8 @@ const singleModeSlice = createSlice({
         } else if (checkDraw(state.board)) {
           state.isDraw = true;
         }
+        // Toggle turn after move
+        state.isPlayerTurn = !state.isPlayerTurn;
       }
     },
     restartGame: (state) => {
@@ -59,6 +67,7 @@ const singleModeSlice = createSlice({
       state.winner = initialState.winner;
       state.isDraw = initialState.isDraw;
       state.winningCells = initialState.winningCells;
+      state.isPlayerTurn = initialState.isPlayerTurn;
     },
     resetGame: (state) => {
       Object.assign(state, initialState);

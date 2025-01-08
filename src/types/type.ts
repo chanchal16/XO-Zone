@@ -16,6 +16,7 @@ export interface SinglePlayerMode {
   isDraw: boolean;
   difficulty: DIFFICULTY;
   winningCells: [number, number][] | null;
+  isPlayerTurn: boolean;
 }
 
 export type IPlayer = {

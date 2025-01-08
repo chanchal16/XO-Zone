@@ -7,10 +7,10 @@ export const handleAIMove = createAsyncThunk(
   "singleMode/handleAIMove",
   async (_, { getState, dispatch }) => {
     const state = getState() as any; // Replace 'any' with proper typing if necessary
-    const { board, aiSymbol, playerSymbol, winner, difficulty } =
+    const { board, aiSymbol, playerSymbol, winner, difficulty, isPlayerTurn } =
       state.singleMode;
 
-    if (!winner) {
+    if (!winner && !isPlayerTurn) {
       const delay = 500; // Delay for UX purposes
       await new Promise((resolve) => setTimeout(resolve, delay));
 
