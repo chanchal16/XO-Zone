@@ -47,7 +47,7 @@ const ResultModal = () => {
     setShowDialog(false);
   };
   return (
-    <Dialog open={showDialog}>
+    <Dialog open={showDialog} onOpenChange={setShowDialog}>
       <DialogTrigger></DialogTrigger>
       <DialogContent className="text-center text-white border-none bg-minimal-playerO-200">
         <DialogHeader>
