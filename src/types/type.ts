@@ -17,6 +17,8 @@ export interface SinglePlayerMode {
   difficulty: DIFFICULTY;
   winningCells: [number, number][] | null;
   isPlayerTurn: boolean;
+  playerAvatar: string | null;
+  botAvatar: string | null;
 }
 
 export type IPlayer = {
@@ -42,3 +44,10 @@ export type MinMax = {
   playerSymbol: string;
   depth: number;
 };
+
+export interface AvatarProp {
+  playerSymbol: SinglePlayerMode["playerSymbol"] | SinglePlayerMode["aiSymbol"];
+  avatarWidth?: number;
+  avatarHeight?: number;
+  type: "player" | "bot";
+}
