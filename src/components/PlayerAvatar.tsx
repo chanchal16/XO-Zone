@@ -17,7 +17,7 @@ const PlayerAvatar = ({
   const dispatch = useDispatch();
   const singlePlayerState = useAppSelector((state) => state.singleMode);
   const { playerAvatar, botAvatar } = singlePlayerState;
-  let avatarUrl = type === "player" ? playerAvatar : botAvatar;
+  const avatarUrl = type === "player" ? playerAvatar : botAvatar;
 
   useEffect(() => {
     if (!avatarUrl) {
