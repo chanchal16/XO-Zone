@@ -19,6 +19,8 @@ const initialState: SinglePlayerMode = {
   difficulty: DIFFICULTY.EASY,
   winningCells: null,
   isPlayerTurn: true,
+  playerAvatar: null,
+  botAvatar: null,
 };
 
 const singleModeSlice = createSlice({
@@ -31,6 +33,12 @@ const singleModeSlice = createSlice({
     },
     selectDifficulty: (state, action: PayloadAction<DIFFICULTY>) => {
       state.difficulty = action.payload;
+    },
+    setPlayerAvatar(state, action: PayloadAction<string>) {
+      state.playerAvatar = action.payload;
+    },
+    setBotAvatar(state, action: PayloadAction<string>) {
+      state.botAvatar = action.payload;
     },
     makeMove: (
       state,
@@ -81,5 +89,7 @@ export const {
   resetGame,
   restartGame,
   selectDifficulty,
+  setPlayerAvatar,
+  setBotAvatar,
 } = singleModeSlice.actions;
 export default singleModeSlice.reducer;
