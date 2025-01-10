@@ -2,25 +2,29 @@ import { checkDraw, checkWin } from "@/helpers/check-win";
 import { DIFFICULTY, SinglePlayerMode } from "@/types/type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+const persistedState = JSON.parse(
+  sessionStorage.getItem("singlePlayerState") ?? "{}"
+);
+
 const initialState: SinglePlayerMode = {
   board: [
     ["", "", ""],
     ["", "", ""],
     ["", "", ""],
   ],
-  playerSymbol: "",
-  aiSymbol: "",
-  score: {
+  playerSymbol: persistedState.playerSymbol || "",
+  aiSymbol: persistedState.aiSymbol || "",
+  score: persistedState.score || {
     player: 0,
     AI: 0,
   },
   winner: null,
   isDraw: false,
-  difficulty: DIFFICULTY.EASY,
+  difficulty: persistedState.difficulty || DIFFICULTY.EASY,
   winningCells: null,
   isPlayerTurn: true,
-  playerAvatar: null,
-  botAvatar: null,
+  playerAvatar: persistedState.playerAvatar || null,
+  botAvatar: persistedState.botAvatar || null,
 };
 
 const singleModeSlice = createSlice({
