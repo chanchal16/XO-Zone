@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import {
   Select,
@@ -12,10 +12,12 @@ import {
   selectDifficulty,
   resetGame,
 } from "@/lib/features/single-player/singlePlayerSlice";
-import { useAppDispatch } from "@/lib/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useRouter } from "next/navigation";
 
 const LeftSidebar = () => {
+  const singlePlayerState = useAppSelector((state) => state.singleMode);
+  const { difficulty } = singlePlayerState;
   const dispatch = useAppDispatch();
   const router = useRouter();
   const handleChange = (value: any) => {
@@ -39,7 +41,10 @@ const LeftSidebar = () => {
         <label className="block text-base font-medium leading-6 text-gray-900">
           Choose a Difficulty
         </label>
-        <Select defaultValue="easy" onValueChange={handleChange}>
+        <Select
+          defaultValue={difficulty ?? "easy"}
+          onValueChange={handleChange}
+        >
           <SelectTrigger className="">
             <SelectValue placeholder="Difficulty" />
           </SelectTrigger>
