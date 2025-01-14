@@ -1,10 +1,6 @@
 import { checkDraw, checkWin } from "@/helpers/check-win";
 import { DIFFICULTY, SinglePlayerMode } from "@/types/type";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-const persistedState = JSON.parse(
-  sessionStorage.getItem("singlePlayerState") ?? "{}"
-);
+import { createSlice, Middleware, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: SinglePlayerMode = {
   board: [
@@ -12,25 +8,38 @@ const initialState: SinglePlayerMode = {
     ["", "", ""],
     ["", "", ""],
   ],
-  playerSymbol: persistedState.playerSymbol || "",
-  aiSymbol: persistedState.aiSymbol || "",
-  score: persistedState.score || {
+  playerSymbol: "",
+  aiSymbol: "",
+  score: {
     player: 0,
     AI: 0,
   },
   winner: null,
   isDraw: false,
-  difficulty: persistedState.difficulty || DIFFICULTY.EASY,
+  difficulty: DIFFICULTY.EASY,
   winningCells: null,
   isPlayerTurn: true,
-  playerAvatar: persistedState.playerAvatar || null,
-  botAvatar: persistedState.botAvatar || null,
+  playerAvatar: null,
+  botAvatar: null,
 };
+
+export const hydrateStateMiddleware: Middleware =
+  (store) => (next) => (action) => {
+    const result = next(action);
+    if (typeof window !== "undefined") {
+      const state = store.getState().singleMode;
+      sessionStorage.setItem("singlePlayerState", JSON.stringify(state));
+    }
+    return result;
+  };
 
 const singleModeSlice = createSlice({
   name: "singleMode",
   initialState,
   reducers: {
+    hydrateState: (state, action) => {
+      return { ...state, ...action.payload };
+    },
     selectSymbol: (state, action: PayloadAction<string>) => {
       state.playerSymbol = action.payload;
       state.aiSymbol = action.payload === "X" ? "O" : "X";
@@ -88,6 +97,7 @@ const singleModeSlice = createSlice({
 });
 
 export const {
+  hydrateState,
   selectSymbol,
   makeMove,
   resetGame,
