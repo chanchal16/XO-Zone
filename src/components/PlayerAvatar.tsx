@@ -5,8 +5,9 @@ import {
 import { useAppSelector } from "@/lib/hooks";
 import { AvatarProp } from "@/types/type";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { v4 as uuid } from "uuid";
 
 const PlayerAvatar = ({
   playerSymbol,
@@ -18,13 +19,18 @@ const PlayerAvatar = ({
   const singlePlayerState = useAppSelector((state) => state.singleMode);
   const { playerAvatar, botAvatar } = singlePlayerState;
   const avatarUrl = type === "player" ? playerAvatar : botAvatar;
+  const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
-    if (!avatarUrl) {
+    setHasMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (hasMounted && !avatarUrl) {
       const fetchAvatar = async () => {
         try {
           const response = await fetch(
-            `https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=${playerSymbol}-${Math.random()}&radius=15`
+            `https://api.dicebear.com/5.x/adventurer-neutral/svg?seed=${playerSymbol}-${uuid()}&radius=15`
           );
 
           if (!response.ok) {
@@ -50,7 +56,9 @@ const PlayerAvatar = ({
 
       fetchAvatar();
     }
-  }, [avatarUrl, playerSymbol, type, dispatch]);
+  }, [avatarUrl, playerSymbol, type, dispatch, hasMounted]);
+
+  if (!hasMounted) return null; // Prevent rendering during SSR
 
   return (
     <div>
@@ -66,4 +74,5 @@ const PlayerAvatar = ({
     </div>
   );
 };
+
 export default PlayerAvatar;

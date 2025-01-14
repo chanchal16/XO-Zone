@@ -2,6 +2,9 @@
 import { usePathname } from "next/navigation";
 import LeftSidebar from "@/components/LeftSidebar";
 import RightSidebar from "@/components/RightSidebar";
+import { useAppDispatch } from "@/lib/hooks";
+import { hydrateState } from "@/lib/features/single-player/singlePlayerSlice";
+import { useEffect } from "react";
 
 export default function ClientLayout({
   children,
@@ -9,6 +12,16 @@ export default function ClientLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const persistedState = sessionStorage.getItem("singlePlayerState");
+      if (persistedState) {
+        dispatch(hydrateState(JSON.parse(persistedState)));
+      }
+    }
+  }, [dispatch]);
   return (
     <>
       <header className="header">

@@ -1,3 +1,4 @@
+"use client";
 import { IPlayer } from "@/types/type";
 import React from "react";
 import SymbolIcon from "./Symbol";
