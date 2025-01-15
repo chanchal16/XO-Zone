@@ -51,3 +51,20 @@ export interface AvatarProp {
   avatarHeight?: number;
   type: "player" | "bot";
 }
+
+export interface MultiPlayerState {
+  roomId: string;
+  board: string[][];
+  playerX: string;
+  playerO: string;
+  winner: string | null;
+  score: {
+    player_X: number;
+    player_O: number;
+  };
+  isDraw: boolean;
+  winningCells: [number, number][] | null;
+  currentPlayer: "X" | "O" | null;
+  playerXAvatar: string | null;
+  playerOAvatar: string | null;
+}
