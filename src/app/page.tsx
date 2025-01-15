@@ -6,10 +6,13 @@ import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 import Image from "next/image";
 import PlayerInfo from "@/components/PlayerInfo";
 import { useState } from "react";
+import { setPlayerXName } from "@/lib/features/multi-player/multiPlayerSlice";
 
 export default function Home() {
   const singlePlayerState = useAppSelector((state) => state.singleMode);
   const { playerSymbol, aiSymbol } = singlePlayerState;
+  const multiPlayerState = useAppSelector((state) => state.multiMode);
+  const { playerX, playerO } = multiPlayerState;
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [mode, setMode] = useState<string>("");
@@ -29,13 +32,13 @@ export default function Home() {
             >
               Single Player
             </Button>
-            {/* <Button
+            <Button
               variant={"secondary"}
-              className="bg-white text-base text-minimal-playerO-200 p-4 hover:font-semibold"
-              onClick={() => setMode('multi')}
+              className="bg-white text-base text-minimal-playerO-200 p-4 hover:text-white hover:bg-minimal-playerO-200"
+              onClick={() => setMode("multi")}
             >
               Multi Player
-            </Button> */}
+            </Button>
           </div>
         </>
       )}
@@ -71,6 +74,25 @@ export default function Home() {
             </div>
           )}
         </>
+      )}
+      {mode === "multi" && (
+        <div className="p-4">
+          <div className="flex flex-col gap-4">
+            <input
+              type="text"
+              placeholder="enter name"
+              value={playerX}
+              onChange={(e) => dispatch(setPlayerXName(e.target.value))}
+            />
+            <Button
+              variant={"outline"}
+              className="border-minimal-playerX-200"
+              onClick={() => console.log("name", playerX)}
+            >
+              create room
+            </Button>
+          </div>
+        </div>
       )}
     </div>
   );
