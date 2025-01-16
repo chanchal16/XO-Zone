@@ -67,4 +67,6 @@ export interface MultiPlayerState {
   currentPlayer: "X" | "O" | null;
   playerXAvatar: string | null;
   playerOAvatar: string | null;
+  connectionStatus: "idle" | "connecting" | "connected" | "disconnected";
+  isRoomCreator: boolean;
 }
