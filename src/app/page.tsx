@@ -78,18 +78,18 @@ export default function Home() {
       {mode === "multi" && (
         <div className="p-4">
           <div className="flex flex-col gap-4">
-            <input
-              type="text"
-              placeholder="enter name"
-              value={playerX}
-              onChange={(e) => dispatch(setPlayerXName(e.target.value))}
-            />
+            <Button
+              variant={"default"}
+              onClick={() => router.push("/multiplayer/create-room")}
+            >
+              New
+            </Button>
             <Button
               variant={"outline"}
               className="border-minimal-playerX-200"
-              onClick={() => console.log("name", playerX)}
+              onClick={() => router.push("/multiplayer/join-room")}
             >
-              create room
+              Join
             </Button>
           </div>
         </div>
