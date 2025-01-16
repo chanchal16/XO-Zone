@@ -20,6 +20,8 @@ const initialState: MultiPlayerState = {
   currentPlayer: "X",
   playerXAvatar: null,
   playerOAvatar: null,
+  isRoomCreator: false,
+  connectionStatus: "idle",
 };
 
 const multiModeSlice = createSlice({
@@ -32,8 +34,28 @@ const multiModeSlice = createSlice({
     setPlayerOName: (state, action: PayloadAction<string>) => {
       state.playerO = action.payload;
     },
+    setRoomId: (state, action: PayloadAction<string>) => {
+      state.roomId = action.payload;
+    },
+    setIsRoomCreator: (state, action: PayloadAction<boolean>) => {
+      state.isRoomCreator = action.payload;
+    },
+    setConnectionStatus: (
+      state,
+      action: PayloadAction<
+        "idle" | "connecting" | "connected" | "disconnected"
+      >
+    ) => {
+      state.connectionStatus = action.payload;
+    },
   },
 });
 
-export const { setPlayerXName, setPlayerOName } = multiModeSlice.actions;
+export const {
+  setPlayerXName,
+  setPlayerOName,
+  setRoomId,
+  setIsRoomCreator,
+  setConnectionStatus,
+} = multiModeSlice.actions;
 export default multiModeSlice.reducer;
