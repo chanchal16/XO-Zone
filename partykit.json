@@ -1,0 +1,7 @@
+{
+    "name": "tictactoe",
+    "main": "src/partykit/server.ts",
+    "parties": {
+        "tictactoe": "src/partykit/server.ts"
+    }
+}
